@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dhl", "src\Dhl\Dhl.csproj", "{F697F777-5950-4CFE-85C2-18314867D5A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DhlIntegrationTests", "tests\DhlIntegrationTests\DhlIntegrationTests.csproj", "{186AA5C6-978C-43FC-B263-92F305C30246}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F697F777-5950-4CFE-85C2-18314867D5A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F697F777-5950-4CFE-85C2-18314867D5A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F697F777-5950-4CFE-85C2-18314867D5A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F697F777-5950-4CFE-85C2-18314867D5A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186AA5C6-978C-43FC-B263-92F305C30246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186AA5C6-978C-43FC-B263-92F305C30246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186AA5C6-978C-43FC-B263-92F305C30246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186AA5C6-978C-43FC-B263-92F305C30246}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AD1F8A8-67F0-41D6-A5B4-35614959FD93}
+	EndGlobalSection
+EndGlobal
