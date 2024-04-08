@@ -26,7 +26,7 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         /// </summary>
         /// <value>The locker identifier.</value>
         [JsonProperty(PropertyName = "lockerID", Required = Required.Always)]
-        public long lockerId { get; set; }
+        public long LockerId { get; set; }
 
         /// <summary>
         /// Gets or sets the post number. 
@@ -34,14 +34,14 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         /// </summary>
         /// <value>The post number.</value>
         [JsonProperty(PropertyName = "postNumber", Required = Required.Always)]
-        public string postNumber { get; set; }
+        public string PostNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the city where the locker is located. value:min:0, max:40
         /// </summary>
         /// <value>The city.</value>
-        [JsonProperty(PropertyName = "City", Required = Required.Always)]
-        public string city { get; set; }
+        [JsonProperty(PropertyName = "city", Required = Required.Always)]
+        public string City { get; set; }
 
         /// <summary>
         /// Gets or sets the country.
