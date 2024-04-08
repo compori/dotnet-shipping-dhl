@@ -35,8 +35,8 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         /// value:min:3, max:10
         /// </summary>
         /// <value>The post number.</value>
-        [JsonProperty(PropertyName = "PostNumber", Required = Required.Always)]
-        public string postNumber { get; set; }
+        [JsonProperty(PropertyName = "postNumber", Required = Required.Always)]
+        public string PostNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the email address of the consignee.
