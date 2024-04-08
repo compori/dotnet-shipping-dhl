@@ -18,6 +18,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         /// </summary>
         /// <value>The value.</value>
         [JsonProperty(PropertyName = "value", Required = Required.Always)]
-        public long Value { get; set; } 
+        public double Value { get; set; } 
     }
 }

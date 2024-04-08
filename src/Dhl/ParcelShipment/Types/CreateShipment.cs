@@ -56,8 +56,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         public string CreationSoftware { get; set; }
 
         /// <summary>
-        /// Gets or sets the creation software.
-        /// Date the shipment is transferred to DHL.
         /// The shipment date can be the current date or a date up to a few days in the future. 
         /// It must not be in the past. 
         /// Iso format required: yyyy-mm-dd.
