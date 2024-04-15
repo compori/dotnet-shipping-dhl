@@ -68,7 +68,8 @@ namespace Compori.Shipping.Dhl.Common
         private Response<TResult> ProcessResponse<TResult>(RestResponse<TResult> response, DateTime startTime)
         {
             Guard.AssertArgumentIsNotNull(response, nameof(response));
-            _ = ProcessResponse((RestResponse)response, startTime);
+
+            _ = this.ProcessResponse((RestResponse)response, startTime);
 
             return new Response<TResult>(
                 response.StatusCode,
@@ -84,7 +85,7 @@ namespace Compori.Shipping.Dhl.Common
         /// <returns>Response.</returns>
         private Response ProcessResponse(RestResponse response, DateTime startTime)
         {
-            ProcessResponse(Settings, response, startTime);
+            this.ProcessResponse(this.Settings, response, startTime);
 
             return new Response(response.StatusCode, response.GetCorrelationId());
         }
@@ -114,6 +115,16 @@ namespace Compori.Shipping.Dhl.Common
         */
 
         /// <summary>
+        /// Wird beim Verarbeiten der Rückmeldung ausgeführt.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="response">The response.</param>
+        /// <param name="startTime">The start time.</param>
+        protected virtual void OnProcessResponse(Settings settings, RestResponse response, DateTime startTime)
+        {
+        }
+
+        /// <summary>
         /// Erstellt für die Restanfrage und -antwort einen Trace.
         /// </summary>
         /// <param name="settings">Die Einstellungen.</param>
@@ -129,20 +140,24 @@ namespace Compori.Shipping.Dhl.Common
             // trace request and response
             if (trace)
             {
-                Trace(response, startTime);
+                this.Trace(response, startTime);
             }
 
             // request was successful
             if (response.IsSuccessful)
             {
+                this.OnProcessResponse(settings, response, startTime);
+
                 return;
             }
 
             // if trace not running, now run.
             if (!trace)
             {
-                Trace(response, startTime);
+                this.Trace(response, startTime);
             }
+
+            this.OnProcessResponse(settings, response, startTime);
 
             // 400
             if (response.StatusCode == HttpStatusCode.BadRequest)
@@ -334,7 +349,7 @@ namespace Compori.Shipping.Dhl.Common
             var startTime = DateTime.UtcNow;
             var response = await client.ExecuteAsync<TOutput>(request, method, cancellationToken).ConfigureAwait(false);
 
-            return ProcessResponse(response, startTime);
+            return this.ProcessResponse(response, startTime);
         }
 
         /// <summary>
@@ -352,7 +367,7 @@ namespace Compori.Shipping.Dhl.Common
             var startTime = DateTime.UtcNow;
             var response = await client.ExecuteAsync(request, method, cancellationToken).ConfigureAwait(false);
 
-            return ProcessResponse(response, startTime);
+            return this.ProcessResponse(response, startTime);
         }
 
         /// <summary>
@@ -367,7 +382,7 @@ namespace Compori.Shipping.Dhl.Common
         /// <param name="cancellationToken">The cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A Task&lt;TOutput&gt; representing the asynchronous operation.</returns>
         public async Task<Response<TOutput>> Post<TInput, TOutput>(
-            string uri, 
+            string uri,
             TInput data,
             Dictionary<string, string> urlParameters = null,
             Dictionary<string, string> queryParameters = null,

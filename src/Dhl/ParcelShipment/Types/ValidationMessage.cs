@@ -27,5 +27,25 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         [JsonProperty(PropertyName = "validationState")]
         public string State { get; set; }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            var result = !string.IsNullOrWhiteSpace(this.State) ? this.State + ": " : "";
+
+            if (!string.IsNullOrWhiteSpace(this.Message))
+            {
+                result += this.Message;
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.Property))
+            {
+                result += " (" + this.Property+ ")";
+            }
+            return !string.IsNullOrEmpty(result) ? result : base.ToString();
+        }
+
     }
 }
