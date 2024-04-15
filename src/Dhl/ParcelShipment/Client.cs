@@ -33,6 +33,7 @@ namespace Compori.Shipping.Dhl.ParcelShipment
             {
                 return;
             }
+
             if (response.StatusCode == HttpStatusCode.BadRequest)
             {
                 var validation = TryParseValidationResult(response);

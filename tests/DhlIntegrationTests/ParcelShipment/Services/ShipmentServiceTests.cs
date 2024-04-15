@@ -84,7 +84,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
                         }
                     }
                 },
-                validate: false,
                 mustEncode: false,
                 includeDocuments: true,
                 documentFormat: "PDF",
@@ -177,7 +176,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
                         }
                     }
                 },
-                validate: false,
                 mustEncode: false,
                 includeDocuments: false,
                 documentFormat: "PDF",
@@ -212,7 +210,86 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
         }
 
         [Fact()]
-        public async Task TestValidation()
+        public async Task TestSucceedValidation()
+        {
+            this.Setup();
+            try
+            {
+                var profile = "STANDARD_GRUPPENPROFIL";
+                var sut = this.CreateService("parcel-shipment-sandbox.ignore.json");
+                var reference = Guid.NewGuid().ToString("N");
+
+                var result = 
+
+                    await sut.Validate(new Types.CreateShipments
+                    {
+                        Profile = profile,
+                        Shipments = new List<CreateShipment>
+                        {
+                            new CreateShipment
+                            {
+                                Product = "V01PAK",
+                                BillingNumber = "33333333330102",
+                                ReferenceNumber = reference,
+                                Shipper = new ShipperAddress
+                                {
+                                    Name1 = "My Online Shop GmbH",
+                                    AddressStreet =  "Sträßchensweg 10",
+                                    AdditionalAddressInformation1 = "",
+                                    PostalCode = "53113",
+                                    City = "Bonn",
+                                    Country = "DEU",
+                                    Email = "max@mustermann.de",
+                                    Phone = "+49 123456789"
+                                },
+                                Consignee = new ContactAddress
+                                {
+                                    Name1 = "Maria Musterfrau",
+                                    AddressStreet = "Kurt-Schumacher-Str. 20",
+                                    AdditionalAddressInformation1 = "Apartment 107",
+                                    PostalCode= "53113",
+                                    City= "Bonn",
+                                    Country= "DEU",
+                                    Email = "maria@musterfrau.de",
+                                    Phone = "+49 987654321"
+                                },
+                                Details = new Details
+                                {
+                                    Dimension = new Dimension
+                                    {
+                                        Unit = "mm",
+                                        Height = 100,
+                                        Length = 200,
+                                        Width = 150
+                                    },
+                                    Weight = new Weight
+                                    {
+                                        Unit = "kg",
+                                        Value = 5.32
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    mustEncode: false,
+                    includeDocuments: false,
+                    documentFormat: "PDF",
+                    printFormat: null,
+                    retourePrintFormat: null,
+                    combine: true);
+                
+
+                Assert.NotNull(result);
+
+            }
+            finally
+            {
+                this.Cleanup();
+            }
+        }
+
+        [Fact()]
+        public async Task TestFailedValidation()
         {
             this.Setup();
             try
@@ -223,7 +300,7 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
 
                 var exception = await Assert.ThrowsAsync<ValidationException>(async () =>
 
-                    await sut.Create(new Types.CreateShipments
+                    await sut.Validate(new Types.CreateShipments
                     {
                         Profile = profile,
                         Shipments = new List<CreateShipment>
@@ -273,7 +350,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
                             }
                         }
                     },
-                    validate: true,
                     mustEncode: false,
                     includeDocuments: false,
                     documentFormat: "PDF",

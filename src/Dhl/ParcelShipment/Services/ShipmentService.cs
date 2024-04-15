@@ -25,7 +25,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
         /// Creates shipment orders.
         /// </summary>
         /// <param name="shipments">The shipments.</param>
-        /// <param name="validate">if set to <c>true</c> [validate].</param>
         /// <param name="mustEncode">if set to <c>true</c> [must encode].</param>
         /// <param name="includeDocuments">if set to <c>true</c> [include documents].</param>
         /// <param name="documentFormat">The document format.</param>
@@ -35,7 +34,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
         /// <returns>CreateShipmentsResult.</returns>
         public async Task<ShipmentsResult> Create(
             CreateShipments shipments,
-            bool validate = false,
             bool mustEncode = false,
             bool includeDocuments = true,
             string documentFormat = "PDF",
@@ -46,7 +44,7 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
             // Query parameters
             var parameters = new Dictionary<string, string>()
             {
-                { "validate", validate ? "true" : "false" },
+                { "validate", "false" },
                 { "mustEncode", mustEncode ? "true" : "false" },
                 { "includeDocs", includeDocuments ? "include" : "URL" },
                 { "docFormat", documentFormat },
@@ -63,6 +61,54 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
 
             // Create Shipment
             var result = await this.Client.Post<CreateShipments, ShipmentsResult>(
+                "orders",
+                shipments,
+                null,
+                parameters).ConfigureAwait(false);
+
+            return result.Result;
+        }
+
+        /// <summary>
+        /// Creates shipment orders.
+        /// </summary>
+        /// <param name="shipments">The shipments.</param>
+        /// <param name="mustEncode">if set to <c>true</c> [must encode].</param>
+        /// <param name="includeDocuments">if set to <c>true</c> [include documents].</param>
+        /// <param name="documentFormat">The document format.</param>
+        /// <param name="printFormat">The print format.</param>
+        /// <param name="retourePrintFormat">The retoure print format.</param>
+        /// <param name="combine">if set to <c>true</c> [combine].</param>
+        /// <returns>CreateShipmentsResult.</returns>
+        public async Task<ValidationResult> Validate(
+            CreateShipments shipments,
+            bool mustEncode = false,
+            bool includeDocuments = true,
+            string documentFormat = "PDF",
+            string printFormat = null,
+            string retourePrintFormat = null,
+            bool combine = true)
+        {
+            // Query parameters
+            var parameters = new Dictionary<string, string>()
+            {
+                { "validate", "true" },
+                { "mustEncode", mustEncode ? "true" : "false" },
+                { "includeDocs", includeDocuments ? "include" : "URL" },
+                { "docFormat", documentFormat },
+                { "combine", combine ? "true" : "false" },
+            };
+            if (!string.IsNullOrEmpty(printFormat))
+            {
+                parameters.Add("printFormat", printFormat);
+            }
+            if (!string.IsNullOrEmpty(retourePrintFormat))
+            {
+                parameters.Add("retourePrintFormat", retourePrintFormat);
+            }
+
+            // Create Shipment
+            var result = await this.Client.Post<CreateShipments, ValidationResult>(
                 "orders",
                 shipments,
                 null,
