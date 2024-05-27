@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Compori.Shipping.Dhl.ParcelShipment.Types
 {
@@ -73,6 +74,6 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Types
         /// </summary>
         /// <value>The validation message.</value>
         [JsonProperty(PropertyName = "validationMessages")]
-        public ValidationMessage ValidationMessage { get; set; }
+        public List<ValidationMessage> ValidationMessage { get; set; } = new List<ValidationMessage>();
     }
 }

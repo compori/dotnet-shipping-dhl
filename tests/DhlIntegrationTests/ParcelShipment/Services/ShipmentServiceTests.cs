@@ -219,7 +219,7 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
                 var sut = this.CreateService("parcel-shipment-sandbox.ignore.json");
                 var reference = Guid.NewGuid().ToString("N");
 
-                var result = 
+                var result =
 
                     await sut.Validate(new Types.CreateShipments
                     {
@@ -277,7 +277,7 @@ namespace Compori.Shipping.Dhl.ParcelShipment.Services
                     printFormat: null,
                     retourePrintFormat: null,
                     combine: true);
-                
+
 
                 Assert.NotNull(result);
 

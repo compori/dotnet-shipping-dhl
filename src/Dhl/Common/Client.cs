@@ -195,7 +195,7 @@ namespace Compori.Shipping.Dhl.Common
             }
             */
 
-            throw new ResponseException(response, "Unbekannter Fehler");
+            throw new ResponseException(response, response.ErrorMessage ?? "Unbekannter Fehler.");
         }
 
         #region Tracing
