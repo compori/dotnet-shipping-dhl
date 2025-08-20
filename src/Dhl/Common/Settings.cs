@@ -8,7 +8,7 @@ namespace Compori.Shipping.Dhl.Common
         /// <summary>
         /// Liefert oder setzt die Basis URL zum API Endpunkt zurück.
         /// </summary>
-        /// <value>Die URL Shipcloud.</value>
+        /// <value>Die URL zu DHL.</value>
         [JsonProperty(PropertyName = "url")]
         public string Url { get; set; }
 

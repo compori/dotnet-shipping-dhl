@@ -3,7 +3,7 @@
 namespace Compori.Shipping.Dhl.Common
 {
     /// <summary>
-    /// Class ShipcloudException.
+    /// Class Dhl Exception.
     /// Implements the <see cref="Exception" />
     /// </summary>
     /// <seealso cref="Exception" />

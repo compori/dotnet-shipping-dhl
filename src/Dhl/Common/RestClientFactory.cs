@@ -2,7 +2,6 @@
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Serializers.NewtonsoftJson;
-using System;
 using System.Net;
 
 namespace Compori.Shipping.Dhl.Common
@@ -17,14 +16,14 @@ namespace Compori.Shipping.Dhl.Common
         /// <summary>
         /// Wurde die das Security Protocol bereits gesetzt?
         /// </summary>
-        private bool isSecurityProtocol;
+        private bool _isSecurityProtocol;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RestClientFactory"/> class.
         /// </summary>
         public RestClientFactory()
         {
-            isSecurityProtocol = false;
+            _isSecurityProtocol = false;
         }
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace Compori.Shipping.Dhl.Common
         {
             Guard.AssertArgumentIsNotNull(settings, nameof(settings));
 
-            if (isSecurityProtocol && !force)
+            if (_isSecurityProtocol && !force)
             {
                 return;
             }
@@ -66,7 +65,7 @@ namespace Compori.Shipping.Dhl.Common
                 Log.Trace("Force SecurityProtocolType.Tls13");
             }
 
-            isSecurityProtocol = true;
+            _isSecurityProtocol = true;
         }
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Compori.Shipping.Dhl.Common
             // Neuen Rest Client erstellen
             var options = new RestClientOptions(settings.Url)
             {
-                MaxTimeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds),
+                Timeout = settings.Timeout,
                 UserAgent = settings.ClientAgent,
                 Authenticator = authenticator
             };

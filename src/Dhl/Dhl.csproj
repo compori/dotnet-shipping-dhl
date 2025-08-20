@@ -5,7 +5,7 @@
     <AssemblyName>Compori.Shipping.Dhl</AssemblyName>
     <RootNamespace>Compori.Shipping.Dhl</RootNamespace>
     <LangVersion>8</LangVersion>
-    <VersionPrefix>0.6.1</VersionPrefix>
+    <VersionPrefix>0.6.2</VersionPrefix>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Company>Compori</Company>
     <Authors>Martin Monnier</Authors>
@@ -27,8 +27,8 @@
     <PackageReference Include="Compori.Base" Version="0.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.1.4" />
-    <PackageReference Include="RestSharp" Version="110.2.0" />
-    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="110.2.0" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="112.1.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 
